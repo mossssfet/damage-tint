@@ -1,11 +1,11 @@
-package me.deadlymc.damagetint;
+package me.mossfet.damagetint;
 
-import com.google.common.base.Charsets;
+import java.nio.charset.StandardCharsets;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.minecraft.client.MinecraftClient;
+import net.fabricmc.loader.api.FabricLoader;
 import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedWriter;
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class TintConfig
 {
     private static TintConfig INSTANCE;
-    private final File config = new File(getConfigDirectory(), "damage_tint.json");
+    private final File config = new File(getConfigDirectory(), "damagetint.json");
     
     private float health;
     private boolean dynamic;
@@ -33,7 +33,7 @@ public class TintConfig
             writer.write(object.toString());
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            DamageTint.LOGGER.error("Config initialization: ", e);
         }
     }
 
@@ -41,8 +41,8 @@ public class TintConfig
     {
         try {
             File jsonFile = getFile();
-            String jsonString = FileUtils.readFileToString(jsonFile, Charsets.UTF_8);
-            JsonElement jelement = new JsonParser().parse(jsonString);
+            String jsonString = FileUtils.readFileToString(jsonFile, StandardCharsets.UTF_8);
+            JsonElement jelement = JsonParser.parseString(jsonString);
             JsonObject jobject = jelement.getAsJsonObject();
             if (jobject.get("health") == null) {
                 jobject.addProperty("health", 20F);
@@ -57,9 +57,9 @@ public class TintConfig
 
             // Write the json to the file
             String resultingJson = new Gson().toJson(jelement);
-            FileUtils.writeStringToFile(jsonFile, resultingJson, Charsets.UTF_8);
+            FileUtils.writeStringToFile(jsonFile, resultingJson, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            e.printStackTrace();
+            DamageTint.LOGGER.error("Config update: ", e);
         }
     }
     
@@ -67,19 +67,19 @@ public class TintConfig
     {
         try {
             File jsonFile = getFile();
-            String jsonString = FileUtils.readFileToString(jsonFile, Charsets.UTF_8);
-            JsonElement jelement = new JsonParser().parse(jsonString);
+            String jsonString = FileUtils.readFileToString(jsonFile, StandardCharsets.UTF_8);
+            JsonElement jelement = JsonParser.parseString(jsonString);
             JsonObject jobject = jelement.getAsJsonObject();
             jobject.addProperty("health", health);
             jobject.addProperty("dynamic", dynamic);
             // Write the json to the file
             String resultingJson = new Gson().toJson(jelement);
-            FileUtils.writeStringToFile(jsonFile, resultingJson, Charsets.UTF_8);
+            FileUtils.writeStringToFile(jsonFile, resultingJson, StandardCharsets.UTF_8);
             // Update variables
             this.health = health;
             this.dynamic = dynamic;
         } catch (IOException e) {
-            e.printStackTrace();
+            DamageTint.LOGGER.error("Config Dynamic: ", e);
         }
     }
 
@@ -87,16 +87,16 @@ public class TintConfig
     {
         try {
             File jsonFile = getFile();
-            String jsonString = FileUtils.readFileToString(jsonFile, Charsets.UTF_8);
-            JsonElement jelement = new JsonParser().parse(jsonString);
+            String jsonString = FileUtils.readFileToString(jsonFile, StandardCharsets.UTF_8);
+            JsonElement jelement = JsonParser.parseString(jsonString);
             JsonObject jobject = jelement.getAsJsonObject();
             jobject.addProperty("dynamic", dynamic);
             // Write the json to the file
             String resultingJson = new Gson().toJson(jelement);
-            FileUtils.writeStringToFile(jsonFile, resultingJson, Charsets.UTF_8);
+            FileUtils.writeStringToFile(jsonFile, resultingJson, StandardCharsets.UTF_8);
             this.dynamic = jobject.get("dynamic").getAsBoolean(); // Update variables
         } catch (IOException e) {
-            e.printStackTrace();
+            DamageTint.LOGGER.error("Config Update dynamic: ", e);
         }
     }
     
@@ -117,10 +117,7 @@ public class TintConfig
     
     public File getConfigDirectory()
     {
-        File configDir = new File(MinecraftClient.getInstance().runDirectory, "config");
-        //noinspection ResultOfMethodCallIgnored
-        configDir.mkdir();
-        return configDir;
+        return FabricLoader.getInstance().getConfigDir().toFile();
     }
     
     public static TintConfig instance()

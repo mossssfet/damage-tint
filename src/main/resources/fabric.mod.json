@@ -2,40 +2,35 @@
   "schemaVersion": 1,
   "id": "damagetint",
   "version": "${version}",
-
   "name": "Damage tint",
   "description": "Adds a red tint on the player's screen when they're low on health.",
   "authors": [
+    "MossFET",
     "DeadlyMC"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/damage-tint",
-    "sources": "https://github.com/DeadlyMC/damage-tint/",
-    "issues": "https://github.com/DeadlyMC/damage-tint/issues"
+    "homepage": "https://modrinth.com/mod/damage-tint",
+    "sources": "https://github.com/mossssfet/damage-tint/",
+    "issues": "https://github.com/mossssfet/damage-tint/issues"
   },
-
   "license": "MIT",
   "icon": "assets/damagetint/icon.png",
-
   "environment": "client",
   "entrypoints": {
     "client": [
-      "me.deadlymc.damagetint.DamageTint"
+      "me.mossfet.damagetint.DamageTint"
     ]
   },
   "mixins": [
-    "damagetint.mixins.json"
+    {
+      "config": "damagetint.mixins.json",
+      "environment": "client"
+    }
   ],
-
   "depends": {
-    "fabricloader": ">=0.11.3",
-    "minecraft": "1.17.x",
-    "java": ">=16"
-  },
-  "suggests": {
-    "another-mod": "*"
-  },
-  "custom": {
-    "modmenu:clientsideOnly": true
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
   }
 }
