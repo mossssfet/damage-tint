@@ -1,0 +1,13 @@
+{
+  "itemGroup.damagetint": "Example Mod Tab",
+  "block.damagetint.example_block": "Example Block",
+  "item.damagetint.example_item": "Example Item",
+
+  "damagetint.configuration.title": "Damage Tint Configs",
+  "damagetint.configuration.section.damagetint.common.toml": "Damage Tint Configs",
+  "damagetint.configuration.section.damagetint.common.toml.title": "Damage Tint Configs",
+  "damagetint.configuration.items": "Item List",
+  "damagetint.configuration.logDirtBlock": "Log Dirt Block",
+  "damagetint.configuration.magicNumberIntroduction": "Magic Number Text",
+  "damagetint.configuration.magicNumber": "Magic Number"
+}

@@ -22,7 +22,7 @@ When enabled, the configured threshold is ignored and your current **maximum hea
 Examples:
 - 20 max HP (10 hearts): Tint scales from 20 HP down to 0 HP.
 - 40 max HP (20 hearts): Tint scales from 40 HP down to 0 HP.
-This is useful with mods that increase or decrease your maximum health, as the effect automatically scales with your health pool.
+  This is useful with mods that increase or decrease your maximum health, as the effect automatically scales with your health pool.
 
 ### Configuration
 Settings are stored in `config/damage_tint.json`.
@@ -30,5 +30,7 @@ The configuration is global and applies to every world and server.
 
 ## Compiling
 - Clone this repo.
-- Follow the fabric docs for setup/build: https://docs.fabricmc.net/1.21.11/develop/
-  
+- Follow the neoforge docs for setup/build: https://docs.neoforged.net/
+- If at any point you are missing libraries in your IDE, or you've run into problems you can
+  run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything
+  {this does not affect your code} and then start the process again.
