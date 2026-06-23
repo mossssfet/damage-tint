@@ -1,12 +1,14 @@
 package me.mossfet.damagetint;
 
-import net.minecraft.client.Minecraft;
+import me.mossfet.damagetint.commands.TintCommand;
+import me.mossfet.damagetint.hud.DamageTintHud;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
@@ -23,9 +25,12 @@ public class DamageTintClient {
     }
 
     @SubscribeEvent
-    static void onClientSetup(FMLClientSetupEvent event) {
-        // Some client setup code
-        DamageTint.LOGGER.info("HELLO FROM CLIENT SETUP");
-        DamageTint.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+    static void onRegisterClientCommands(RegisterClientCommandsEvent event) {
+        TintCommand.register(event.getDispatcher());
+    }
+
+    @SubscribeEvent
+    static void onRegisterGuiLayers(RegisterGuiLayersEvent event) {
+       event.registerBelowAll(DamageTint.id("vignette"), DamageTintHud::render);
     }
 }

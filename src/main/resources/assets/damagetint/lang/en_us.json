@@ -1,13 +1,9 @@
 {
-  "itemGroup.damagetint": "Example Mod Tab",
-  "block.damagetint.example_block": "Example Block",
-  "item.damagetint.example_item": "Example Item",
-
   "damagetint.configuration.title": "Damage Tint Configs",
-  "damagetint.configuration.section.damagetint.common.toml": "Damage Tint Configs",
-  "damagetint.configuration.section.damagetint.common.toml.title": "Damage Tint Configs",
-  "damagetint.configuration.items": "Item List",
-  "damagetint.configuration.logDirtBlock": "Log Dirt Block",
-  "damagetint.configuration.magicNumberIntroduction": "Magic Number Text",
-  "damagetint.configuration.magicNumber": "Magic Number"
+  "damagetint.configuration.section.damagetint.client.toml": "Damage Tint Configs",
+  "damagetint.configuration.section.damagetint.client.toml.title": "Damage Tint Configs",
+  "damagetint.configuration.dynamic": "Dynamic",
+  "damagetint.configuration.health": "Health Threshold",
+  "damagetint.configuration.health.tooltip": "The threshold determines when the tint starts appearing (Example: /tint 10 --> Tint starts at 10 HP (5 hearts))",
+  "damagetint.configuration.dynamic.tooltip": "When enabled, the configured threshold is ignored and your current maximum health is used instead"
 }
